@@ -1,0 +1,18 @@
+import "package:flutter/material.dart";
+import 'package:google_fonts/google_fonts.dart';
+
+latoStyle(double size, [Color color, FontWeight fw = FontWeight.w700]){
+  return GoogleFonts.lato(
+    fontSize: size,
+    color: color,
+    fontWeight: fw,
+  );
+}
+
+ralewayStyle(double size, [Color color, FontWeight fw = FontWeight.w700]){
+  return GoogleFonts.raleway(
+    fontSize: size,
+    color: color,
+    fontWeight: fw,
+  );
+}

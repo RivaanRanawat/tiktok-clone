@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/navigation_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,10 +11,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'TikTok Clone',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Text("This IS TikTok Clone"),
+      home: NavigationScreen(),
     );
   }
 }
