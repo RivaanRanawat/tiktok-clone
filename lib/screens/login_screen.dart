@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:tiktok_clone/screens/home_screen.dart';
 import 'package:tiktok_clone/screens/signup_screen.dart';
 import 'package:tiktok_clone/universal_variables.dart';
 
@@ -9,6 +11,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  var isLoading = false;
+
+  loginUser(BuildContext context) {
+    setState(() {
+      isLoading = false;
+    });
+    try {
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+      setState(() {
+        isLoading = true;
+      });
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } catch (err) {
+      setState(() {
+        isLoading = false;
+      });
+      print(err);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20, right: 20),
               child: TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -55,6 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(left: 20, right: 20),
               child: TextField(
+                controller: _passwordController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -70,16 +99,21 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              width: MediaQuery.of(context).size.width / 2,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.red,
-              ),
-              child: Center(
-                child: Text(
-                  "Login",
-                  style: latoStyle(20, Colors.white, FontWeight.w700),
+            InkWell(
+              onTap: () => loginUser(context),
+              child: Container(
+                width: MediaQuery.of(context).size.width / 2,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                ),
+                child: Center(
+                  child: isLoading == false? Text(
+                    "Login",
+                    style: latoStyle(20, Colors.white, FontWeight.w700),
+                  )
+                  :
+                  CircularProgressIndicator(backgroundColor: Colors.white,),
                 ),
               ),
             ),

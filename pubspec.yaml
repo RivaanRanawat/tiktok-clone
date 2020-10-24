@@ -31,6 +31,7 @@ dependencies:
   cloud_firestore:
   firebase_auth:
   firebase_storage:
+  firebase_core:
   image_picker:
   google_fonts:
   path_provider:
