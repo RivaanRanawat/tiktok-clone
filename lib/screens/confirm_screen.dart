@@ -235,6 +235,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     "Please wait while we are uploading..",
                     style: ralewayStyle(20, Colors.white),
                   ),
+                  SizedBox(height: 30),
                   CircularProgressIndicator(
                     backgroundColor: Colors.red,
                   ),
