@@ -38,7 +38,7 @@ dependencies:
   video_player:
   intl:
   file_picker:
-  video_compress:
+  flutter_video_compress:
   timeago:
   image:
   esys_flutter_share:
