@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/screens/pages/addVideo_page.dart';
 import 'package:tiktok_clone/screens/pages/message_page.dart';
@@ -19,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SearchPage(),
     AddVideoPage(),
     MessagePage(),
-    ProfilePage(),
+    ProfilePage(FirebaseAuth.instance.currentUser.uid),
   ];
 
   int pageIdx = 0;

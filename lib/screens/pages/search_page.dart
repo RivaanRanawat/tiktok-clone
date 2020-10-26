@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
+import 'package:tiktok_clone/screens/pages/profile_page.dart';
 import 'package:tiktok_clone/universal_variables.dart';
 
 class SearchPage extends StatefulWidget {
@@ -53,13 +54,29 @@ class _SearchPageState extends State<SearchPage> {
                     itemCount: snapshot.data.docs.length,
                     itemBuilder: (BuildContext context, int index) {
                       DocumentSnapshot user = snapshot.data.docs[index];
-                      return ListTile(
-                        leading: Icon(Icons.search, color: Colors.white,),
-                        trailing: CircleAvatar(
-                          backgroundColor: Colors.black,
-                          backgroundImage: NetworkImage(user.data()["profilePic"]),
+                      return InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => ProfilePage(
+                              user.data()["uid"],
+                            ),
+                          ),
                         ),
-                        title: Text(user.data()["username"], style: ralewayStyle(25, Colors.white),),
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                          trailing: CircleAvatar(
+                            backgroundColor: Colors.black,
+                            backgroundImage:
+                                NetworkImage(user.data()["profilePic"]),
+                          ),
+                          title: Text(
+                            user.data()["username"],
+                            style: ralewayStyle(25, Colors.white),
+                          ),
+                        ),
                       );
                     });
               }),
